@@ -41,8 +41,8 @@ namespace integ_class3
                 Name = name,
                 Status = status,
                 Details = details,
-                Salary = salary,       // new imple to
-                Department = department // assign
+                Salary = salary,
+                Department = department
             };
 
             _dbLogic.Save(emp);
@@ -51,14 +51,13 @@ namespace integ_class3
             Console.WriteLine($"\n[System] '{name}' successfully saved as {status} ({details}) in {department} with a salary of {salary:N2}.");
         }
 
-   
-       public EmployeeModel? FetchEmployee(string name)
-{
-    var allEmployees = _dbLogic.GetAll();
+        public EmployeeModel? FetchEmployee(string name)
+        {
+            var allEmployees = _dbLogic.GetAll();
 
-    return allEmployees.FirstOrDefault(e => 
-        e.Name != null && e.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
-}
+            return allEmployees.FirstOrDefault(e => 
+                e.Name != null && e.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        }
 
         public List<EmployeeModel> GetList()
         {

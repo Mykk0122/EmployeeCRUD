@@ -5,6 +5,15 @@ namespace IntegMiyuki
 {
     internal class Program
     {
+      
+    var builder = WebApplication.CreateBuilder(args);
+    builder.Services.AddControllers(); 
+
+    var app = builder.Build();
+
+    app.UseRouting();
+    app.MapControllers(); 
+    app.Run();
         static AppService service = new AppService();
 
         static void Main(string[] args)
