@@ -11,31 +11,8 @@ namespace integ_class3
         private IEmployeeData _dbLogic = new AccountDBData();
         private IEmployeeData _jsonLogic = new AccountJsonData();
 
-        public void ProcessEmployee(string name, string sChoice, string dChoice, decimal salary, string department)
+        public void ProcessEmployee(string name, string status, string details, decimal salary, string department)
         {
-            if (sChoice == "3")
-            {
-                _dbLogic.Delete(name);
-                _jsonLogic.Delete(name);
-                Console.WriteLine($"\n[System] '{name}' deleted from SQL and JSON.");
-                return;
-            }
-
-            string status = sChoice switch
-            {
-                "1" => "Hired",
-                "2" => "Promoted",
-                _ => "Unknown" 
-            };
-
-            string details = dChoice switch
-            {
-                "1" => "New",
-                "2" => "Senior",
-                "3" => "Retired",
-                _ => "General"
-            };
-
             var emp = new EmployeeModel
             {
                 Name = name,
@@ -48,13 +25,20 @@ namespace integ_class3
             _dbLogic.Save(emp);
             _jsonLogic.Save(emp);
 
-            Console.WriteLine($"\n[System] '{name}' successfully saved as {status} ({details}) in {department} with a salary of {salary:N2}.");
+            Console.WriteLine($"\n[System] '{name}' successfully saved as {status} ({details}).");
+        }
+
+        
+        public void DeleteEmployee(string name)
+        {
+            _dbLogic.Delete(name);
+            _jsonLogic.Delete(name);
+            Console.WriteLine($"\n[System] '{name}' deleted from SQL and JSON.");
         }
 
         public EmployeeModel? FetchEmployee(string name)
         {
             var allEmployees = _dbLogic.GetAll();
-
             return allEmployees.FirstOrDefault(e => 
                 e.Name != null && e.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
