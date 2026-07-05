@@ -49,7 +49,6 @@ namespace IntegMiyuki
             string department = "N/A";
             decimal salary = 0;
 
-            // Only ask for details if we aren't deleting (choice "3")
             if (actionChoice != "3")
             {
                 status = GetStatusFromInput();
@@ -97,7 +96,7 @@ namespace IntegMiyuki
                 Console.WriteLine($"\nFound: {emp.Name}");
                 Console.WriteLine($"Status: {emp.Status}");
                 Console.WriteLine($"Department: {emp.Department}");
-                Console.WriteLine($"Salary: {emp.Salary:C}"); // Uses Currency formatting
+                Console.WriteLine($"Salary: {emp.Salary:C}"); 
             }
             else
             {
